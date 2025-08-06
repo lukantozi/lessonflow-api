@@ -1,0 +1,13 @@
+.venv/
+# Python
+__pycache__/
+*.pyc
+
+# Local env + creds
+.env
+
+# Generated outputs
+lessons/*.pdf
+
+# OS cruft
+.DS_Store

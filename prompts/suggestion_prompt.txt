@@ -1,0 +1,32 @@
+You are proposing topics for an ESL lesson at the {level} level.
+
+Provide EXACTLY these three sections with numbered one-line titles. No explanations, no subtitles, no extra commentary.
+
+### Reading 1 Topics (1–5 human-centered; 6–10 situational)
+1. ...
+10. ...
+
+### Reading 2 Topics (1–5 knowledge/discovery; 6–10 situational/applied)
+1. ...
+10. ...
+
+### Grammar Focuses (6–8 items)
+1. ...
+
+Rules for variety:
+- Keep 1–5 and 6–10 distinct within each list.
+- Avoid repeating stems like “The Role of…”, “The Impact of…”, “The Importance of…”.
+- Suitable for {level} learners; avoid advanced jargon.
+- Avoid overlap with the “Previous Lesson” content that follows.
+- Titles must be concise, specific, and different from each other.
+
+Global difficulty target for the final lesson (for your awareness):
+≈70% {level}, 20% one level lower ({level-1}), 10% one level higher ({level+1}).
+
+
+
+
+
+
+
+
