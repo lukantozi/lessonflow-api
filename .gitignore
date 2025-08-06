@@ -11,3 +11,6 @@ lessons/*.pdf
 
 # OS cruft
 .DS_Store
+
+# Generated lessons (don’t track)
+lessons/
