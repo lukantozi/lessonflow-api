@@ -235,11 +235,13 @@ def generate_lesson(level: str, topic1: str, topic2: str, grammar: str, reading_
         reading_mode_block = (
             "## Reading Material 1 – (title)\n"
             "- 5 numbered dialogue scenes (1)–(5); each scene 10–14 short lines, alternating speakers; no narration.\n"
+            "- When alternating speakers, start the sentence from the newline.\n"
             "- Scenes should form a coherent storyline.\n\n"
             "## Reading 1 – Comprehension & Discussion Questions\n"
             "- 5 items; at least 2 invite opinion/discussion.\n\n"
             "## Reading Material 2 – (title)\n"
             "- 5 numbered dialogue scenes (1)–(5); each scene 10–14 short lines, alternating speakers; no narration.\n"
+            "- When alternating speakers, start the sentence from the newline.\n"
             "- Scenes should form a coherent storyline.\n\n"
             "## Reading 2 – Comprehension & Discussion Questions\n"
             "- 5 items; at least 2 invite opinion/discussion.\n"
