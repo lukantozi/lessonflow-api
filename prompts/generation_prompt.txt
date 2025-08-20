@@ -1,6 +1,10 @@
 You are designing a complete English-lesson package for my Polish learners at the {level} level.
 Use the previous lesson (provided later) strictly as a structural template only—do not reuse any content, themes, examples, or vocabulary from it.
 
+IMPORTANT: The reading mode (dialogue vs. paragraphs) may change from lesson to lesson.
+No matter what style is present in the “Previous Lesson”, you must format **Reading Material 1** and **Reading Material 2** according to the {READING_MODE_BLOCK} instructions for the current lesson.
+In other words, if {READING_MODE_BLOCK} specifies numbered paragraphs, do not copy dialogue scenes from the previous lesson, and vice versa.
+
 Follow these steps:
 
 1) Topic & Grammar Selection
@@ -10,19 +14,7 @@ Use EXACTLY the Topic 1, Topic 2, and Grammar Focus that I provide above this pr
 
 {READING_MODE_BLOCK}
 
-## Dialogue 1
-- 12–16 natural lines.
-- Subtle integration of the chosen grammar focus (do not mark or highlight grammar).
-
-## Dialogue 1 – Questions
-- 5 items; at least 1 invites discussion.
-
-## Dialogue 2
-- 12–16 natural lines.
-- Subtle integration of the chosen grammar focus (do not mark or highlight grammar).
-
-## Dialogue 2 – Questions
-- 5 items.
+{END_SECTIONS_BLOCK}
 
 ## Vocabulary Focus
 - Exactly 12 target items.

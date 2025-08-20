@@ -243,6 +243,18 @@ def generate_lesson(level: str, topic1: str, topic2: str, grammar: str, reading_
             "## Reading 2 – Comprehension & Discussion Questions\n"
             "- 5 items; at least 2 invite opinion/discussion.\n"
         )
+        end_sections_block = (
+        "## Mini Text 1\n"
+        "- 1–2 paragraphs that build on the topics in the reading material.\n"
+        "- Subtle integration of the grammar focus.\n\n"
+        "## Mini Text 1 – Questions\n"
+        "- 5 items; at least 1 invites discussion.\n\n"
+        "## Mini Text 2\n"
+        "- 1–2 paragraphs that continue the story or present a different angle.\n"
+        "- Subtle integration of the grammar focus.\n\n"
+        "## Mini Text 2 – Questions\n"
+        "- 5 items; at least 1 invites discussion.\n"
+        )
     else:
         reading_mode_block = (
             "## Reading Material 1 – (title)\n"
@@ -254,6 +266,18 @@ def generate_lesson(level: str, topic1: str, topic2: str, grammar: str, reading_
             "## Reading 2 – Comprehension & Discussion Questions\n"
             "- 5 items; at least 2 invite opinion/discussion.\n"
         )
+        end_sections_block = (
+        "## Dialogue 1\n"
+        "- 12–16 natural lines.\n"
+        "- Subtle integration of the grammar focus.\n\n"
+        "## Dialogue 1 – Questions\n"
+        "- 5 items; at least 1 invites discussion.\n\n"
+        "## Dialogue 2\n"
+        "- 12–16 natural lines.\n"
+        "- Subtle integration of the grammar focus.\n\n"
+        "## Dialogue 2 – Questions\n"
+        "- 5 items.\n"
+        )
 
     lower, higher = adjacent_levels(level)
 
@@ -261,6 +285,7 @@ def generate_lesson(level: str, topic1: str, topic2: str, grammar: str, reading_
         gen_template
         .replace("{level}", level)
         .replace("{READING_MODE_BLOCK}", reading_mode_block)
+        .replace("{END_SECTIONS_BLOCK}", end_sections_block)
         .replace("{level-1}", lower)
         .replace("{level+1}", higher)
     )
