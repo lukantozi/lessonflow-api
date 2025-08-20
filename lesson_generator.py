@@ -91,7 +91,6 @@ def get_last_lesson() -> str:
         latest_path = max(with_ts_valid, key=lambda item: item[1])[0]
     else:
         latest_path = max(files, key=lambda f: f.stat().st_mtime)
-    print(f"[DEBUG] Using previous lesson file: {latest_path.name}")
     return latest_path.read_text(encoding="utf-8")
 
 def save_lesson(content: str, topic1: str, level: str, reading_mode: str) -> Path:
