@@ -35,6 +35,8 @@ Use EXACTLY the Topic 1, Topic 2, and Grammar Focus that I provide above this pr
 - At least 5 varied exercises.
 - Formatting:
   - Headings: Exercise 1 – Title
+  - Try to not to repeat new words if possible in different exercises. 
+  - Make sure to match the difficulty to the level chosen
   - Then: 1., 2., 3. numbering; single-line items; a–e options on one line.
   - No tables.
 
@@ -51,6 +53,7 @@ Exercises (5 total)
 - Exercise 3 – Transformation
 - Exercise 4 – Mixed Context
 - Exercise 5 – Open-Ended Production
+- Please make sure to match the difficulty of the exercises to the level chosen
 
 ## General Discussion Prompts
 - 10 prompts.
