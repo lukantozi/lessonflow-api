@@ -212,50 +212,65 @@ def choose_topics(level: str):
 # =========================
 # Generation (single reading mode for both readings)
 # =========================
-REQUIRED_HEADERS = [
-    "## Reading Material 1", "## Reading 1",
-    "## Reading Material 2", "## Reading 2",
-    "## Dialogue 1", "## Dialogue 1 – Questions",
-    "## Dialogue 2", "## Dialogue 2 – Questions",
-    "## Vocabulary Focus", "## Vocabulary Exercises",
-    "## Grammar Focus", "## General Discussion Prompts",
-    "## Guided Role-Plays",
-]
+#REQUIRED_HEADERS = [
+#    "## Reading Material 1", "## Reading 1",
+#    "## Reading Material 2", "## Reading 2",
+#    "## Dialogue 1", "## Dialogue 1 – Questions",
+#    "## Dialogue 2", "## Dialogue 2 – Questions",
+#    "## Vocabulary Focus", "## Vocabulary Exercises",
+#    "## Grammar Focus", "## General Discussion Prompts",
+#    "## Guided Role-Plays",
+#]
 
-def _has_all_headers(md_text: str) -> bool:
+#def _has_all_headers(md_text: str) -> bool:
+#    lines = [ln.strip() for ln in md_text.splitlines()]
+#    return all(any(ln.startswith(h) for ln in lines) for h in REQUIRED_HEADERS)
+
+def has_required_headers(md_text: str, required: List[str]) -> bool:
     lines = [ln.strip() for ln in md_text.splitlines()]
-    return all(any(ln.startswith(h) for ln in lines) for h in REQUIRED_HEADERS)
+    return all(any(ln.startswith(h) for ln in lines) for h in required)
+
 
 def generate_lesson(level: str, topic1: str, topic2: str, grammar: str, reading_mode: str) -> str:
     gen_template = read_file(PROMPTS / "generation_prompt.txt")
     last_lesson = get_last_lesson()
 
     if reading_mode == "dialogue":
+        required_end_headers = [
+            "## Mini Text 1", "## Mini Text 1 – Questions",
+            "## Mini Text 2", "## Mini Text 2 – Questions",
+        ]
         reading_mode_block = (
             "## Reading Material 1 – (title)\n"
             "- 5 numbered dialogue scenes (1)–(5); each scene 10–14 short lines, alternating speakers; no narration.\n"
-            "- Scenes should form a coherent storyline.\n\n"
+            "- Scenes should form a single, coherent storyline.\n\n"
+            "- Do not present separate scenarios; the scenes should follow one another logically.\n\n"
             "## Reading 1 – Comprehension & Discussion Questions\n"
             "- 5 items; at least 2 invite opinion/discussion.\n\n"
             "## Reading Material 2 – (title)\n"
             "- 5 numbered dialogue scenes (1)–(5); each scene 10–14 short lines, alternating speakers; no narration.\n"
-            "- Scenes should form a coherent storyline.\n\n"
+            "- Scenes should form a single, coherent storyline.\n\n"
+            "- Do not present separate scenarios; the scenes should follow one another logically.\n\n"
             "## Reading 2 – Comprehension & Discussion Questions\n"
             "- 5 items; at least 2 invite opinion/discussion.\n"
         )
-        end_sections_block = (
+        end_section_headers = (
         "## Mini Text 1\n"
-        "- 1–2 paragraphs that build on the topics in the reading material.\n"
-        "- Subtle integration of the grammar focus.\n\n"
         "## Mini Text 1 – Questions\n"
-        "- 5 items; at least 1 invites discussion.\n\n"
         "## Mini Text 2\n"
-        "- 1–2 paragraphs that continue the story or present a different angle.\n"
-        "- Subtle integration of the grammar focus.\n\n"
         "## Mini Text 2 – Questions\n"
-        "- 5 items; at least 1 invites discussion.\n"
+        )
+        end_sections_block = (
+        "- In **Mini text 1**, instead of a 12–16 line conversation, write a 1–2‑paragraph mini‑text that develops the story or themes.\n"
+        "- In **Mini text 1 – Questions**, write 5 comprehension/discussion questions about that mini‑text.\n"
+        "- In **Mini text 2**, write another 1–2‑paragraph mini‑text that continues or complements the story.\n"
+        "- In **Mini text 2 – Questions**, write 5 questions about that second mini‑text.\n"
         )
     else:
+        required_end_headers = [
+            "## Dialogue 1", "## Dialogue 1 – Questions",
+            "## Dialogue 2", "## Dialogue 2 – Questions",
+        ]
         reading_mode_block = (
             "## Reading Material 1 – (title)\n"
             "- 5 numbered paragraphs (1)–(5), approximately equal in characters.\n\n"
@@ -266,18 +281,27 @@ def generate_lesson(level: str, topic1: str, topic2: str, grammar: str, reading_
             "## Reading 2 – Comprehension & Discussion Questions\n"
             "- 5 items; at least 2 invite opinion/discussion.\n"
         )
-        end_sections_block = (
+        end_section_headers = (
         "## Dialogue 1\n"
-        "- 12–16 natural lines.\n"
-        "- Subtle integration of the grammar focus.\n\n"
         "## Dialogue 1 – Questions\n"
-        "- 5 items; at least 1 invites discussion.\n\n"
         "## Dialogue 2\n"
-        "- 12–16 natural lines.\n"
-        "- Subtle integration of the grammar focus.\n\n"
         "## Dialogue 2 – Questions\n"
-        "- 5 items.\n"
         )
+        end_sections_block = (
+        "- In **Dialogue 1**, write a 12–16 line natural conversation.\n"
+        "- In **Dialogue 1 – Questions**, write 5 questions about that dialogue.\n"
+        "- In **Dialogue 2**, write another 12–16 line conversation.\n"
+        "- In **Dialogue 2 – Questions**, write 5 questions about that dialogue.\n"
+        )
+    
+    required_headers = [
+        "## Reading Material 1", "## Reading 1",
+        "## Reading Material 2", "## Reading 2",
+        *required_end_headers,
+        "## Vocabulary Focus", "## Vocabulary Exercises",
+        "## Grammar Focus", "## General Discussion Prompts",
+        "## Guided Role-Plays",
+    ]
 
     lower, higher = adjacent_levels(level)
 
@@ -285,6 +309,7 @@ def generate_lesson(level: str, topic1: str, topic2: str, grammar: str, reading_
         gen_template
         .replace("{level}", level)
         .replace("{READING_MODE_BLOCK}", reading_mode_block)
+        .replace("{END_SECTION_HEADERS}", end_section_headers)
         .replace("{END_SECTIONS_BLOCK}", end_sections_block)
         .replace("{level-1}", lower)
         .replace("{level+1}", higher)
@@ -314,7 +339,7 @@ def generate_lesson(level: str, topic1: str, topic2: str, grammar: str, reading_
     )
 
     # one retry if any section is missing
-    if not _has_all_headers(md):
+    if not has_required_headers(md, required_headers):
         md_retry = chat_content(
             model=MODEL_GENERATION,
             messages=[{"role": "user", "content":

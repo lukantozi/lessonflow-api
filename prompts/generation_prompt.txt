@@ -66,10 +66,7 @@ OUTPUT ORDER (do not deviate; do not stop early):
 ## Reading 1 – Comprehension & Discussion Questions
 ## Reading Material 2 – (title)
 ## Reading 2 – Comprehension & Discussion Questions
-## Dialogue 1
-## Dialogue 1 – Questions
-## Dialogue 2
-## Dialogue 2 – Questions
+{END_SECTION_HEADERS}
 ## Vocabulary Focus
 ## Vocabulary Exercises
 ## Grammar Focus – (title)
