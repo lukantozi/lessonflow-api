@@ -1,5 +1,7 @@
 You are proposing topics for an ESL lesson at the {level} level.
 
+Avoid generic topics such as work-life balance, public transportation, job interviews, time management, cultural festivals, and renewable energy. Suggest more unusual, specific real-world contexts instead.
+
 Provide EXACTLY these three sections with numbered one-line titles. No explanations, no subtitles, no extra commentary.
 
 ### Reading 1 Topics (1–5 human-centered; 6–10 situational)
