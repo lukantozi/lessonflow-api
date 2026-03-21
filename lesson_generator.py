@@ -110,8 +110,8 @@ def convert_to_pdf(md_path: Path) -> Path:
     print(f"Converted to PDF: {pdf_path}")
     return pdf_path
 
-def sync_to_ipad(pdf_path: Path):
-    dest = Path.home() / "Nextcloud/iPad/Lessons" / pdf_path.name
+def move_to_lessons(pdf_path: Path):
+    dest = Path.home() / "Nextcloud/Lessons" / pdf_path.name
     dest.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run(["cp", "--remove-destination", str(pdf_path), str(dest)])
     print(f"Synced to iPad: {dest}")
@@ -383,8 +383,8 @@ def main():
     print("[STEP] Converting to PDF...")
     pdf_file = convert_to_pdf(md_file)
 
-    print("[STEP] Syncing to iPad...")
-    sync_to_ipad(pdf_file)
+    print("[STEP] Moving to Lessons...")
+    move_to_lessons(pdf_file)
 
     print("[DONE]")
 
