@@ -114,7 +114,7 @@ def move_to_lessons(pdf_path: Path):
     dest = Path.home() / "Nextcloud/Lessons" / pdf_path.name
     dest.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run(["cp", "--remove-destination", str(pdf_path), str(dest)])
-    print(f"Synced to iPad: {dest}")
+    print(f"Synced to Lessons: {dest}")
 
 def adjacent_levels(level: str) -> Tuple[str, str]:
     order = ["A2", "B1", "B2", "C1"]
