@@ -117,7 +117,7 @@ def move_to_lessons(pdf_path: Path):
     print(f"Synced to Lessons: {dest}")
 
 def adjacent_levels(level: str) -> Tuple[str, str]:
-    order = ["A2", "B1", "B2", "C1"]
+    order = ["A1", "A2", "B1", "B2", "C1"]
     if level not in order:
         return ("A2", "B2")
     i = order.index(level)
@@ -356,7 +356,7 @@ def generate_lesson(level: str, topic1: str, topic2: str, grammar: str, reading_
 # Main
 # =========================
 def main():
-    level = input("Select difficulty level (A2, B1, B2, C1): ").strip().upper()
+    level = input("Select difficulty level (A1, A2, B1, B2, C1, C2): ").strip().upper()
     mode_raw = input("Reading format (P = paragraphs, D = dialogue-as-reading) [P/D]: ").strip().upper() or "P"
     reading_mode = "dialogue" if mode_raw == "D" else "paragraphs"
 
