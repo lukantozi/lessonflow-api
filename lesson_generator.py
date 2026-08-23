@@ -117,7 +117,7 @@ def move_to_lessons(pdf_path: Path):
     print(f"Synced to Lessons: {dest}")
 
 def adjacent_levels(level: str) -> Tuple[str, str]:
-    order = ["A1", "A2", "B1", "B2", "C1"]
+    order = ["A1", "A2", "B1", "B2", "C1", "C2"]
     if level not in order:
         return ("A2", "B2")
     i = order.index(level)
