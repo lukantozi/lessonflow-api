@@ -128,14 +128,34 @@ def adjacent_levels(level: str) -> Tuple[str, str]:
 # =========================
 # Suggestions: exactly 10 per reading (1–5 human, 6–10 situational)
 # =========================
-def get_topic_suggestions(level: str) -> str:
+def get_topic_suggestions(level: str, rejected_topics: Optional[List[str]] = None) -> str:
     prompt_template = read_file(PROMPTS / "suggestion_prompt.txt")
     last_lesson = get_last_lesson()
+
     full_prompt = (
         prompt_template.replace("{level}", level)
-        + "\n\n---\n\nPrevious Lesson (avoid overlap of themes/keywords):\n```markdown\n"
-        + last_lesson + "\n```"
+        + "\n\n---\n\nPrevious Lesson (avoid overlap of themes/keywords):\n"
+        + "```markdown\n"
+        + last_lesson
+        + "\n```"
+        + "\n\nAdditional topic requirements:\n"
+        + "- Keep the language appropriate for the CEFR level; "
+          "do not restrict the ideas to generic textbook subjects.\n"
+        + "- Prefer specific situations with a small problem, decision, "
+          "surprise, or discovery over broad subject labels.\n"
+        + "- Make the topics varied in setting and purpose.\n"
+        + "- Preserve the required headings, numbering, and item counts.\n"
     )
+
+    if rejected_topics:
+        full_prompt += (
+            "\n\nThe user rejected these topics in this session:\n"
+            + "\n".join(f"- {topic}" for topic in rejected_topics)
+            + "\n\nSuggest different underlying themes, not renamed versions "
+              "of these topics. Changing 'local market' to 'supermarket', "
+              "for example, does not count as a new theme.\n"
+        )
+
     return chat_content(
         model=MODEL_SUGGESTIONS,
         messages=[{"role": "user", "content": full_prompt}],
@@ -172,8 +192,10 @@ def parse_suggestions(raw: str) -> Tuple[List[str], List[str], List[str]]:
     return r1, r2, g
 
 def choose_topics(level: str):
+    rejected_topics: List[str] = []
+
     while True:
-        raw = get_topic_suggestions(level)
+        raw = get_topic_suggestions(level, rejected_topics)
         r1, r2, g = parse_suggestions(raw)
 
         if len(r1) == 10 and len(r2) == 10 and 6 <= len(g) <= 8:
@@ -191,6 +213,10 @@ def choose_topics(level: str):
         use = input("\nUse these suggestions? (y/n): ").strip().lower()
         if use == "y":
             break
+
+        if use == "n":
+            rejected_topics.extend(r1 + r2)
+            rejected_topics = list(dict.fromkeys(rejected_topics))
 
     def pick(label: str, options: List[str]) -> str:
         choice = input(f"\nYour choice for {label} (number or text): ").strip()
